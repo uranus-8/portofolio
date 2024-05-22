@@ -224,17 +224,14 @@ export default {
     text-align: center;
   }
   .main .visual img{
-    width: 100%;
-    height: auto;
-    padding-top:2%;
+    height: 100vh;
+    width: auto;
+    padding-top:1%;
   }
 }
 @media (min-width: 1920px) { 
   .main .visual img{
     padding-top:0;
-    height: 100vh;
-    width: auto;
-    
   }
 }
 
@@ -250,7 +247,7 @@ export default {
 ======================================================================= */
 /* Pagenation */
 .pagination {
-  right: 10px;
+  right: -30px;
   top: 50%;
   transform: translate(-50%, -50%) rotate(90deg);
   transform-origin: right center;
