@@ -1,0 +1,336 @@
+/* Font lato
+======================================================================= */
+.lato-thin {
+    font-family: "Lato", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+.lato-light {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.lato-regular {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.lato-bold {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.lato-black {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+.lato-thin-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+}
+.lato-light-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+.lato-regular-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+} 
+.lato-bold-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+.lato-black-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+}
+
+/* Font ibm-plex-sans
+======================================================================= */
+.ibm-plex-sans-jp-regular {
+    font-family: "IBM Plex Sans JP", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Table
+======================================================================= */
+.pl-table {
+    .row{ 
+      margin: 5px 0; 
+      padding: 0 20px; 
+      align-items: center; 
+    }
+    .col{ 
+      padding: 0 10px; 
+      overflow: hidden; 
+      text-overflow: ellipsis;
+    }
+    .pl-thead {
+      color: #979797;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin: 15px 0;
+      &.tall {
+        background-color: #263338;
+        margin: 0;
+        padding: 5px 0;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: initial;
+        .col {
+          border-right: 1px solid rgba(255, 255, 255, 0.2);
+          text-align: center;
+          align-self: stretch;
+          &:last-child {
+            border: none;
+          }
+          .large {
+            font-size: 21px;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+    .pl-tbody {
+      .row {
+        background-color: #ffffff;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        color: #979797;
+        font-size: 11px;
+      }
+      &.scroll {
+        max-height: 100px;
+        overflow-x: scroll;
+      }
+    }
+  }
+
+/* Initialization
+======================================================================= */
+body {
+    background: #000000;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: white !important;
+    font-size: 0.85rem;
+}
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    margin-top: 56px;
+}
+
+.close-icon {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.bg-dark {
+    background-color: #00000000 !important;
+}
+
+.fixed-top { top: 12px; }
+
+.pad-20{ padding: 20% 5%; }
+
+.pad-y-10{ padding: 10% 0% 15%; }
+
+.w100{
+    width: 100%;
+    height: auto;
+}
+
+.absolute-footer{
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.absolute{
+    position: absolute;
+}
+
+.aboutsec img{
+    width: 30%;
+    height: auto;
+}
+
+p, li, footer{
+    font-size: 0.85rem;
+}
+
+/* Structure
+======================================================================= */
+.pc{
+    display: none !important;
+}
+.sp{
+    display: inline-block !important;
+}
+
+.u-logo{
+    width: 48%;
+}
+
+.logo{
+    padding-left: 5%;
+    padding-top: 4%;  
+}
+
+.logo h1{
+    font-size: 1.5rem;
+}
+
+.main h2{
+    font-size: 2.2rem;;
+}
+
+h3{
+    font-size: 2.0rem;
+    position: relative;
+}
+
+h4{
+    font-size: 1.14rem;
+    font-weight: bold;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #5fff94, #7bb6fe); /* グラデーションの定義 */
+    -webkit-background-clip: text; /* テキストに背景をクリップ */
+    -webkit-text-fill-color: transparent; /* テキストの塗りつぶし色を透明に */
+    background-clip: text; /* テキストに背景をクリップ (標準対応) */
+}
+
+.section-conts {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 1;
+    overflow: hidden;
+    background: radial-gradient(ellipse at top, #1e2520, transparent),
+            radial-gradient(ellipse at bottom, #1f2428, transparent);
+}
+
+.section-conts h3::before {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 1px;
+    background-color: #0097A7;
+    position: absolute;
+    top: 62px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.maintitle{
+    position: absolute;
+    bottom: 4%;
+    left: 5%;
+}
+
+.main .visual img.sp{
+    padding-top: 10%;
+}
+
+
+/* Breakpoints
+======================================================================= */
+@media (min-width: 1200px) { 
+    .pc{
+        display: inline-block !important;
+    }
+    .sp{
+        display: none !important;
+    }
+
+    body {
+        font-size: 0.95rem;
+        text-align: center;
+    }
+ 
+    .u-logo {
+        width: 20%;
+    }
+
+    .logo {
+        padding-left: 2%;
+        padding-top: 1.6%;
+    }
+
+    .logo h1{
+        text-align: left;
+    }
+
+    .maintitle{
+        bottom: 4%;
+        left: 11%;
+    }
+
+    .main h2{
+        font-size: 4.2rem;;
+    }
+
+    .section-conts::before {
+        top: 39%;
+    }
+
+    .pad-y-10 {
+        padding: 10px 0 71px;
+    }
+
+    .w100{
+        width: 65%;
+        height: auto;
+    }
+
+    .pl-table div{
+        font-size: 0.92rem;
+    }
+
+    h3 {
+        font-size: 3.75rem !important;
+    }
+
+    .section-conts h3::before {
+        top: 110px;
+    }
+
+    .inline_blc{
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .aboutsec img{
+        width: 200px;
+        height: auto;
+    }
+
+    p, li{
+        font-size: 0.95rem;
+    }
+
+}
