@@ -49,7 +49,7 @@ export default {
     '@nuxt/typescript-build',
   ],
 
-  Modules: [
+  modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios'
@@ -61,7 +61,8 @@ export default {
 
   server: {
     host: '0.0.0.0', // デフォルトは 'localhost'
-    port: 3000
+    // port: 3000
+    port: process.env.PORT
   }
 
 }
