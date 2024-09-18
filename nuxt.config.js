@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -63,6 +65,30 @@ export default {
     host: '0.0.0.0', // デフォルトは 'localhost'
     // port: 3000
     port: process.env.PORT
-  }
+  },
+
+  buildModules: [
+    "nuxt-microcms-module",
+    '@nuxt/typescript-build',
+    '@nuxtjs/composition-api/module'
+  ],
+  microcms: {
+    options: {
+      serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
+      apiKey: process.env.MICROCMS_API_KEY,
+    },
+    mode: process.env.NODE_ENV === "production" ? "server" : "all",
+  },
+
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'work-detail',
+        path: '/works/:id',
+        component: resolve(__dirname, 'pages/work_detail.vue')
+      });
+    }
+  },
+
 
 }

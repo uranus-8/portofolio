@@ -1,18 +1,20 @@
 <template>
-    <div class="d-flex justify-content-between fixed-top">
+    <div class="d-flex justify-content-between fixed-top header-wrapper">
       <div class="logo">
         <h1>
-          <img src="/logo.png" alt="uranus" class="u-logo">
+          <nuxt-link to="/">
+            <img src="/logo.png" alt="uranus" class="u-logo">
+          </nuxt-link>
         </h1>
       </div>
       <div class="">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <button 
-            class="navbar-toggler" 
-            type="button" 
-            @click="toggleMenu" 
+          <button
+            class="navbar-toggler"
+            type="button"
+            @click="toggleMenu"
             :aria-expanded="isExpanded"
-            aria-controls="navbarNav" 
+            aria-controls="navbarNav"
             aria-label="Toggle navigation"
           >
             <span v-if="!isExpanded" class="navbar-toggler-icon"></span>
@@ -24,13 +26,10 @@
                 <a href="#home" class="nav-link" @click.prevent="scrollTo('home')">Home</a>
               </li>
               <li class="nav-item">
-                <a href="#about" class="nav-link" @click.prevent="scrollTo('about')">About</a>
+                <a href="#experience" class="nav-link" @click.prevent="scrollTo('experience')">Experience</a>
               </li>
               <li class="nav-item">
                 <a href="#project" class="nav-link" @click.prevent="scrollTo('project')">Project</a>
-              </li>
-              <li class="nav-item">
-                <a href="#experience" class="nav-link" @click.prevent="scrollTo('experience')">Experience</a>
               </li>
               <li class="nav-item">
                 <a href="#contact" class="nav-link" @click.prevent="scrollTo('contact')">Contact</a>
@@ -41,33 +40,48 @@
       </div>
     </div>
 </template>
-  
+
 <script>
-export default {
-data() {
-    return {
-    isExpanded: false
-    }
-},
-methods: {
-    toggleMenu() {
-    this.isExpanded = !this.isExpanded;
-    },
-    scrollTo(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-    }
-    }
-}
-}
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  data() {
+      return {
+      isExpanded: false
+      }
+  },
+  methods: {
+      toggleMenu() {
+      this.isExpanded = !this.isExpanded;
+      },
+      scrollTo: async function (sectionId) {
+      const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          try {
+            await this.$router.push({ path: '/', hash: `#${sectionId}` });
+            this.$nextTick(() => {
+              const el = document.getElementById(sectionId);
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              }
+            });
+          } catch (error) {
+            console.error('Navigation error:', error);
+          }
+        }
+      }
+
+  }
+})
 </script>
-  
+
 <style scoped>
 /* Custum Navigation
 ======================================================================= */
 .navbar {
-    padding: 0;
+    padding: 10px 0 0 0;
     z-index: 1030;
     width: 100%;
 }
@@ -104,7 +118,7 @@ methods: {
     padding: 1.2rem 1rem;
 }
 
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
     .navbar {
         margin-right: 20px;
     }
@@ -113,5 +127,5 @@ methods: {
         background-color: #00000000 !important;
     }
 }
+
 </style>
-  

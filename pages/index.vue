@@ -1,157 +1,132 @@
 <template>
   <div class="container-fluid ibm-plex-sans-jp-regular">
-    <div id="particles-js"></div>
 
-    <!--Header-->
-    <Header />
+    <div class="contents-wrapper">
+      <div id="particles-js-home"></div>
 
-    <!--ページネーション-->
-    <div class="pagination position-fixed pc">
-      <button
-        v-for="(section, index) in sections"
-        :key="index"
-        :class="{ active: activeSectionIndex === index }"
-        @click="navigateToSection(index)"
-      >
-        {{ index + 1 }}
-      </button>
-    </div>
+      <!--Header-->
+      <Header />
 
-    <!--First View-->
-    <div class="main section" id="home">
-      <div class="visual">
-        <img src="/main_sp.png" alt="uranus_image" class="sp">
-        <img src="/main_pc.png" alt="uranus_image" class="pc">
+      <!--ページネーション-->
+      <div class="pagination position-fixed pc">
+        <button
+          v-for="(section, index) in sections"
+          :key="index"
+          :class="{ active: activeSectionIndex === index }"
+          @click="navigateToSection(index)"
+        >
+          {{ index + 1 }}
+        </button>
       </div>
-      <div class="maintitle">
-        <h2 class="lato-black gradient-text">Gunji Portofolio</h2>
-        <p>Webdesign, Frontend, Gamecreative, etc..</p>
-      </div>
-    </div>
 
-    <!--About-->
-    <div class="section pad-20 section-conts" id="about">
-      <div class="aboutsec">
-        <h3 class="lato-bold pad-y-10 text-center">About</h3>
-        <div class="">
-          <div class="pb-5">
-            <p>
-              これまでに、UI/UXデザイン、Webデザイン、アニメーションの制作、フロントエンドエンドエンジニアリングの開発に参画。
-              <br>さらに、チームマネジメントやディレクション（企画・提案）も経験があり。
-            </p>
-            <p>
-              今後はよりイメージを形にすること、ストーリー性や没入感の高いコンテンツを作り出すこと、直感的な操作感のあるソフトウェアの開発に注力していきたいと考えています。
-              <br>またモデリング、デザインを含むゲーム制作にも積極的に挑戦していきたいと考えてます。
-            </p>
-            <p>
-              デザインやモデリングなど、ビジュアル面での表現力を最大限に活かし、人々に感動や驚きを与えるクリエイティブな作品を生み出していきたいと思います。
-            </p>
-          </div>
-          <div class="pc">
-            <img src="/gunji.png" alt="" class="inline_blc my_image">
-            <ul class="inline_blc">
-              <li>活動名：如月　琿次（きさらぎ　ぐんじ）</li>
-              <li>職業：クリエイター / Webデザイナー / フロントエンドエンジニア</li>
-              <li>趣味：ゲームを作りながらうちのわんこを愛でること</li>
-            </ul>
-          </div>
+      <!--First View-->
+      <div class="main section" id="home">
+        <div class="visual">
+          <img src="/main_sp.png" alt="uranus_image" class="sp">
+          <!-- <img src="/main_pc.png" alt="uranus_image" class="pc"> -->
+          <div ref="threeContainer" class="three-container pc"></div>
+        </div>
+        <div class="maintitle">
+          <h2 class="lato-black gradient-text">Gunji Portofolio</h2>
+          <p class="sub-title">Web Designer / UI/UX Designer / Front-end Engineer</p>
         </div>
       </div>
-    </div>
 
-    <!--Project-->
-    <div class="section pad-20 section-conts" id="project">
-      <div class="text-center">
-        <h3 class="lato-bold pad-y-10 text-center">Project</h3>
-        <p>
-          直近の個人開発を紹介します。
-        </p>
-        <img src="/wild_offroader.png" alt="Wild offroader" class="w100">
-        <div class="mt-3">
-          <p>
-            タイトル「Wild offroader」。豊かな緑のオフロードコースをグングン駆け抜けて競走するオフロードカーレースです！
-          </p>
-          <p>
-            <a target="_blank" href="https://play.unity.com/mg/other/webgl-builds-405853">Demo URLはこちら（Unity Play 無料）</a>
-          </p>
-        </div>
-      </div>
-    </div>
+      <!--Experience-->
+      <div class="section pad-20 section-conts" id="experience">
+        <div class="d-md-flex conts">
+          <div class="left-conts">
+            <h3 class="lato-bold pad-y-10">Experience</h3>
+            <div class="pab-5">
+              <p class="">
+                Webデザイン、UI/UXデザイン、アニメーション制作、フロントエンドエンジニアリングなどを中心に活動しています。<br>
+                Webデザインのチームマネジメントや、各種案件のディレクションなども経験しました。<br>
+                デザイン制作にはAdobe XD、Figma、Photoshop、Illustrator、AfterEffects、PremiereProなどを用いてきました。<br><br>
 
-    <!--Experience-->
-    <div class="section pad-20 section-conts" id="experience">
-      <div>
-        <h3 class="lato-bold pad-y-10 text-center">Experience</h3>
-        <p>
-          参画したプロジェクトの一部です。
-        </p>
-        <div class="pl-table">
-          <div class="pl-thead">
-            <div class="row">
-              <div class="col">Overview</div>
-              <div class="col">Role</div>
-              <div class="col">Skill</div>
+                現在は、フロントエンドエンジニアとしてプロジェクトに参画し、新たなプラットフォーム開発に挑戦中です。<br>
+                TypeScriptを中心に、React、Vue、Angularなどを使った開発を行っています。<br>
+                WordPressやLaravelなどを用いたバックエンド領域での開発も一部経験があります。
+              </p>
+            </div>
+            <div class="">
+              <a class="btn btn-primary btn-lg mb-4" href="/works">Works</a>
+              <p class="text-secondary">
+                ※閲覧は限定ユーザーのみになります。
+              </p>
             </div>
           </div>
-          <div class="pl-tbody">
-            <div class="row">
-              <div class="col">Business e-Learning</div>
-              <div class="col">
-                Management, Direction, Design, Frontend
-              </div>
-              <div class="col">
-              XD, Photoshop ,Next.js ,React ,TypeScript ,AWS ,Amplify ,GraphQL
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">Certain event system (agriculture, forestry and fisheries)</div>
-              <div class="col">Direction, Frontend, Backend</div>
-              <div class="col">Laravel, PHP, MySQL, Vue</div>
-            </div>
-            <div class="row">
-              <div class="col">Certain recruitment system</div>
-              <div class="col">Direction, Design, Frontend</div>
-              <div class="col">Illustrator, Photoshop, XD, HTML, SASS, Illust-Drawing, JavaScript</div>
-            </div>
+          <div class="right-conts">
+            <img src="/experience.jpg" alt="" class="pc">
           </div>
         </div>
-        <p class="pt-3">
-          制作実績の一部は<a href="/works">こちら</a>になります。
-        </p>
+        <div id="particles-js-experience"></div>
       </div>
-    </div>
 
-    <!--Contact-->
-    <div class="section pad-20 section-conts" id="contact">
-      <div>
-        <h3 class="lato-bold pad-y-10 text-center">Contact</h3>
-        <p>
-          お仕事のご依頼は以下からお願いします。
-        </p>
-        <p><a :href="`mailto:${decodedEmail}`">{{ decodedEmail }}</a></p>
-        <footer class="absolute-footer">&copy;2024 uranus All Right Reserved.</footer>
+      <!--Project-->
+      <div class="section pad-20 section-conts project-conts" id="project">
+        <div class="d-md-flex conts">
+          <div class="left-conts">
+            <div class="pab-5">
+              <h3 class="lato-bold pad-y-10">Personal Project</h3>
+              <img src="/wild_offroader.png" alt="Wild offroader" class="sp sp-img mb-3">
+              <p>
+                個人でゲーム開発を始めました！<br>
+                「Wild offroader」は、豊かな緑のオフロードコースをグングン駆け抜けて競走する3Dオフロードカーレースです！<br>
+                ゲームエンジンはUnity、モデリングはBlenderを用いて作成しました。<br>
+                以下のリンクをクリックすると、Unity Playにてデモをプレイすることができます。
+              </p>
+            </div>
+            <div class="mt-3">
+              <p>
+                <a class="btn btn-primary btn-lg mb-4" target="_blank" href="https://play.unity.com/mg/other/webgl-builds-405853">Demo</a>
+              </p>
+            </div>
+          </div>
+          <div class="right-conts">
+            <img src="/wild_offroader.png" alt="Wild offroader" class="pc">
+          </div>
+        </div>
+        <div id="particles-js-project"></div>
+      </div>
+
+      <!--Contact-->
+      <div class="section pad-20 section-conts" id="contact">
+        <div>
+          <h3 class="lato-bold pad-y-10 text-center">Contact</h3>
+          <p>メッセージは以下よりお願いします。お気軽にお問い合わせください。</p>
+          <Form />
+
+          <!-- <p><a :href="`mailto:${decodedEmail}`">{{ decodedEmail }}</a></p> -->
+          <footer class="absolute-footer">&copy;2024 uranus All Right Reserved.</footer>
+        </div>
+        <div id="particles-js-contact"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Form from '~/components/Form.vue'
 import Header from '~/components/Header.vue';
+import * as THREE from 'three';
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 export default {
   components: {
-    Header
+    Header,
+    Form
   },
   data() {
     return {
+      loading: true, // ローディング状態を管理するデータプロパティ
       isExpanded: false,
       activeSectionIndex: 0,
       // ここでスライドに対応するセクションを定義
       sections: [
         { id: 'home', title: 'Home' },
-        { id: 'about', title: 'About' },
-        { id: 'project', title: 'Project' },
+        // { id: 'about', title: 'About' },
         { id: 'experience', title: 'Experience' },
+        { id: 'project', title: 'Project' },
         { id: 'contact', title: 'Contact' }
       ],
       encodedEmail: [102, 116, 109, 105, 104, 45, 106, 104, 114, 96, 113, 96, 102, 104, 63, 102, 108, 96, 104, 107, 45, 98, 110, 108]
@@ -167,11 +142,21 @@ export default {
       this.loadParticles();
       this.initScrollify();
     }
+    this.initThree();
   },
   methods: {
     loadParticles() {
       this.$nextTick(() => {
-        window.particlesJS.load('particles-js', '/particles.json', function() {
+        window.particlesJS.load('particles-js-home', '/particles.json', function() {
+          console.log('callback - particles.js config loaded');
+        });
+        window.particlesJS.load('particles-js-experience', '/particles.json', function() {
+          console.log('callback - particles.js config loaded');
+        });
+        window.particlesJS.load('particles-js-project', '/particles.json', function() {
+          console.log('callback - particles.js config loaded');
+        });
+        window.particlesJS.load('particles-js-contact', '/particles.json', function() {
           console.log('callback - particles.js config loaded');
         });
       });
@@ -204,6 +189,94 @@ export default {
         str += String.fromCharCode(code + 1);
       });
       return str;
+    },
+    async initThree() {
+      const container = this.$refs.threeContainer;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.zoom = 2.7; // カメラのズームを設定
+      camera.updateProjectionMatrix(); // ズームを適用するためにプロジェクションマトリックスを更新
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setClearColor(0x000000, 0); // 背景色を透明に設定
+      container.appendChild(renderer.domElement);
+
+      // グリッドヘルパーを追加
+      // const gridHelper = new THREE.GridHelper(300, 300);
+      // scene.add(gridHelper);
+
+      // 軸ヘルパーを追加
+      // const axesHelper = new THREE.AxesHelper(200);
+      // scene.add(axesHelper);
+
+      // カメラコントロールを追加
+      // const controls = new OrbitControls(camera, renderer.domElement);
+      // controls.enableDamping = true; // 慣性を有効にする
+      // controls.dampingFactor = 0.25; // 慣性の強さ
+      // controls.screenSpacePanning = false; // パン操作を無効にする
+      // controls.maxPolarAngle = Math.PI / 2; // 垂直方向の回転を制限
+
+      // ライトを追加
+      const light = new THREE.DirectionalLight(0xffffff, 8); // 強度を2に設定
+      light.position.set(0, 2.5, 1.2).normalize();
+      scene.add(light);
+
+      const pointLight = new THREE.PointLight(0xffffff, 3, 100); // 強度を2に設定
+      pointLight.position.set(50, 50, 50);
+      scene.add(pointLight);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 2); // 強度を1に設定
+      scene.add(ambientLight);
+
+      const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+      const loader = new GLTFLoader();
+      let model; // スコープの外でモデルを宣言
+      loader.load('/main_pc.glb', (gltf) => {
+        model = gltf.scene;
+        model.position.set(0, 0, 0); // モデルの位置を設定
+        model.rotation.x = Math.PI/30; // Y軸周りに90度回転
+        model.rotation.y = Math.PI/-3.8; // Y軸周りに90度回転
+        // model.rotation.z = Math.PI / -14; // Z軸周りに90度回転
+        scene.add(model);
+        renderer.render(scene, camera);
+        this.loading = false; // モデルの読み込みが完了したらローディングを非表示にする
+        console.log(this.loading);
+      }, undefined, (error) => {
+        console.error(error);
+        this.loading = false; // エラーが発生してもローディングを非表示にする
+      });
+
+      // カメラの位置を設定
+      camera.position.set(0, 10, 120);
+      // カメラの回転を設定
+      // camera.rotation.z = Math.PI / -29; // X軸周りに30度回転
+      // camera.rotation.x = Math.PI / 30; // X軸周りに30度回転
+      // camera.rotation.y = Math.PI / 40; // X軸周りに30度回転
+
+      // OrbitControlsを動的にインポート
+      const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls.js');
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true; // 慣性を有効にする
+      controls.dampingFactor = 0.25; // 慣性の強さ
+      controls.screenSpacePanning = false; // パン操作を無効にする
+      controls.maxPolarAngle = Math.PI / 2; // 垂直方向の回転を制限
+
+      let clock = new THREE.Clock();
+
+      const animate = () => {
+        requestAnimationFrame(animate);
+        // controls.update(); // カメラコントロールを更新
+        if (model) {
+          const time = clock.getElapsedTime();
+          // model.position.y = Math.sin(time) * 1.2;
+          model.position.y = Math.sin(time) * 1.2 - 8;
+          // console.log(time);
+        }
+        renderer.render(scene, camera);
+      };
+
+      animate();
     }
   }
 }
@@ -217,31 +290,60 @@ export default {
     width: 100%;
     height: auto;
 }
+
+.three-container {
+  width: 100%;
+  height: 100vh; /* 高さを設定 */
+  background-color: transparent; /* 背景色を透明に設定 */
+}
+
+.loading-wrapper{
+  width: 100%;
+  height: 100vh; /* 高さを設定 */
+  background-color: black; /* 背景色を透明に設定 */
+  z-index: 99999;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #fff;
+}
+
+
 /* Breakpoints
 ======================================================================= */
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
   .main .visual{
     text-align: center;
   }
   .main .visual img{
     height: 100vh;
     width: auto;
-    padding-top:1%;
+    padding-top: 0%;
+    margin-top: -44px;
   }
 }
-@media (min-width: 1920px) { 
+@media (min-width: 1920px) {
   .main .visual img{
     padding-top:0;
   }
 }
 
-#particles-js {
+#particles-js-home,
+#particles-js-experience,
+#particles-js-project,
+#particles-js-contact {
   position: absolute;
   width: 100%;
   height: 100%;
   background: #000000;
   z-index: -1;
 }
+
 
 /* Pagenation
 ======================================================================= */
@@ -255,30 +357,30 @@ export default {
 }
 
 .pagination button {
-  width: 20px; /* Set the width */
-  height: 20px; /* Set the height, equal to width for a perfect circle */
-  line-height: 20px; /* Center the text vertically */
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
   padding: 0;
-  margin: 0 10px; /* Spacing between buttons */
-  background-color: white; /* Background color */
-  color: white; /* Text color */
+  margin: 0 10px;
+  background-color: white;
+  color: white;
   text-align: center;
-  border: 1px solid #ccc; /* Border color */
-  border-radius: 50%; /* Makes the button round */
-  cursor: pointer; /* Cursor on hover */
-  outline: none; /* Removes the outline */
-  font-size: 14px; /* Font size of the numbers */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Shadow for 3D effect */
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  font-size: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
 }
 
 .pagination button.active {
-  background-color: #7bb6fe; /* Active button background color */
-  color: #7bb6fe; /* Active button text color */
-  border-color: #7bb6fe; /* Active button border color */
+    background-color: #77818e;
+    color: #77818e;
+    border-color: #77818e;
 }
 
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
 
 }
 
