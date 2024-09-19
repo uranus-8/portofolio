@@ -1,6 +1,16 @@
 <template>
   <div class="container-fluid ibm-plex-sans-jp-regular">
 
+    <div :class="{'loading-wrapper': true, 'fade-out': !loading}">
+      <div class="loader">
+        <div class="spinner-border text-center" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="loading-text">Now loading...</div>
+      </div>
+    </div>
+
+    <!-- <div v-show="!loading" class="contents-wrapper"> -->
     <div class="contents-wrapper">
       <div id="particles-js-home"></div>
 
@@ -137,14 +147,40 @@ export default {
       return this.encodeEmail(this.encodedEmail);
     }
   },
-  mounted() {
+  async mounted() {
     if (process.client) {
-      this.loadParticles();
-      this.initScrollify();
+      this.$nextTick(async () => {
+        await this.initThree();
+        this.loadParticles();
+        this.initScrollify();
+        this.loading = false; // すべて完了してからローディングを非表示
+      });
     }
-    this.initThree();
   },
   methods: {
+    async loadModel() {
+      const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+      const loader = new GLTFLoader();
+
+      // 読み込み開始をログに出力
+      console.log('Attempting to load model from URL');
+
+      // glbファイルをPromiseで読み込む
+      return new Promise((resolve, reject) => {
+        loader.load(
+          'https://storage.googleapis.com/gunji_portofolio_glb/main_pc.glb',
+          (gltf) => {
+            console.log('Model loaded successfully:', gltf); // モデルが正常に読み込まれた場合
+            resolve(gltf);
+          },
+          undefined,
+          (error) => {
+            console.error('Error loading model:', error); // エラーが発生した場合
+            reject(error);
+          }
+        );
+      });
+    },
     loadParticles() {
       this.$nextTick(() => {
         window.particlesJS.load('particles-js-home', '/particles.json', function() {
@@ -192,6 +228,16 @@ export default {
     },
     async initThree() {
       const container = this.$refs.threeContainer;
+
+      // containerがない場合のエラーハンドリング
+      if (!container) {
+        console.error('threeContainer not found');
+        this.loading = false;
+        return;
+      }
+
+      console.log('Initializing Three.js container:', container);
+
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
       camera.zoom = 2.7; // カメラのズームを設定
@@ -202,57 +248,67 @@ export default {
       renderer.setClearColor(0x000000, 0); // 背景色を透明に設定
       container.appendChild(renderer.domElement);
 
-      // グリッドヘルパーを追加
-      // const gridHelper = new THREE.GridHelper(300, 300);
-      // scene.add(gridHelper);
+      // サイズ変更時の処理
+      const resizeHandler = () => {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      };
 
-      // 軸ヘルパーを追加
-      // const axesHelper = new THREE.AxesHelper(200);
-      // scene.add(axesHelper);
-
-      // カメラコントロールを追加
-      // const controls = new OrbitControls(camera, renderer.domElement);
-      // controls.enableDamping = true; // 慣性を有効にする
-      // controls.dampingFactor = 0.25; // 慣性の強さ
-      // controls.screenSpacePanning = false; // パン操作を無効にする
-      // controls.maxPolarAngle = Math.PI / 2; // 垂直方向の回転を制限
+      window.addEventListener('resize', resizeHandler);
+      resizeHandler(); // ロード完了後にリサイズを手動で実行
 
       // ライトを追加
-      const light = new THREE.DirectionalLight(0xffffff, 8); // 強度を2に設定
-      light.position.set(0, 2.5, 1.2).normalize();
+      const light = new THREE.DirectionalLight(0xffffff, 10); // 強度を2に設定
+      light.position.set(11, 25.5, 5).normalize();
       scene.add(light);
 
-      const pointLight = new THREE.PointLight(0xffffff, 3, 100); // 強度を2に設定
-      pointLight.position.set(50, 50, 50);
+      const pointLight = new THREE.PointLight(0xffffff, 100, 100); // 強度を2に設定
+      pointLight.position.set(10, 10, 0);
       scene.add(pointLight);
 
-      const ambientLight = new THREE.AmbientLight(0xffffff, 2); // 強度を1に設定
+      const ambientLight = new THREE.AmbientLight(0xffffff, 3); // 強度を1に設定
       scene.add(ambientLight);
 
-      const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
-      const loader = new GLTFLoader();
-      let model; // スコープの外でモデルを宣言
-      loader.load('/main_pc.glb', (gltf) => {
-        model = gltf.scene;
+      try{
+        console.log("Loading model...");
+        const gltf = await this.loadModel(); // glTFモデルを先にロード
+        const model = gltf.scene;
+
         model.position.set(0, 0, 0); // モデルの位置を設定
         model.rotation.x = Math.PI/30; // Y軸周りに90度回転
         model.rotation.y = Math.PI/-3.8; // Y軸周りに90度回転
-        // model.rotation.z = Math.PI / -14; // Z軸周りに90度回転
+
         scene.add(model);
-        renderer.render(scene, camera);
+        // this.loading = false; // モデルの読み込みが完了したらローディングを非表示にする
+        console.log('Model added to scene:', model);
+
         this.loading = false; // モデルの読み込みが完了したらローディングを非表示にする
-        console.log(this.loading);
-      }, undefined, (error) => {
+        console.log('this.loading:', this.loading);
+
+        let clock = new THREE.Clock();
+
+        const animate = () => {
+          requestAnimationFrame(animate);
+          // controls.update(); // カメラコントロールを更新
+          if (model) {
+            const time = clock.getElapsedTime();
+            model.position.y = Math.sin(time) * 1.2 - 8;;
+          }
+          renderer.render(scene, camera);
+        };
+
+        animate();
+
+      } catch (error) {
         console.error(error);
         this.loading = false; // エラーが発生してもローディングを非表示にする
-      });
+      }
 
       // カメラの位置を設定
       camera.position.set(0, 10, 120);
-      // カメラの回転を設定
-      // camera.rotation.z = Math.PI / -29; // X軸周りに30度回転
-      // camera.rotation.x = Math.PI / 30; // X軸周りに30度回転
-      // camera.rotation.y = Math.PI / 40; // X軸周りに30度回転
 
       // OrbitControlsを動的にインポート
       const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls.js');
@@ -261,22 +317,9 @@ export default {
       controls.dampingFactor = 0.25; // 慣性の強さ
       controls.screenSpacePanning = false; // パン操作を無効にする
       controls.maxPolarAngle = Math.PI / 2; // 垂直方向の回転を制限
+      controls.update(); // カメラコントロールの更新
 
-      let clock = new THREE.Clock();
-
-      const animate = () => {
-        requestAnimationFrame(animate);
-        // controls.update(); // カメラコントロールを更新
-        if (model) {
-          const time = clock.getElapsedTime();
-          // model.position.y = Math.sin(time) * 1.2;
-          model.position.y = Math.sin(time) * 1.2 - 8;
-          // console.log(time);
-        }
-        renderer.render(scene, camera);
-      };
-
-      animate();
+      console.log('OrbitControls initialized:', controls);
     }
   }
 }
@@ -297,21 +340,44 @@ export default {
   background-color: transparent; /* 背景色を透明に設定 */
 }
 
-.loading-wrapper{
-  width: 100%;
-  height: 100vh; /* 高さを設定 */
-  background-color: black; /* 背景色を透明に設定 */
-  z-index: 99999;
+.loader {
+  display: flex; /* フレックスボックスにする */
+  flex-direction: column; /* 縦に並べる */
+  align-items: center; /* 横方向の中央揃え */
+  justify-content: center; /* 縦方向の中央揃え */
+  gap: 10px; /* スピナーとテキストの間にスペースを空ける */
 }
 
-.loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  color: #fff;
+.loading-wrapper {
+  position: fixed; /* 全画面表示に固定 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* 画面全体の高さ */
+  background-color: black;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+  display: flex; /* 全体もフレックスに */
+  justify-content: center; /* 縦の中央揃え */
+  align-items: center; /* 横の中央揃え */
 }
+
+.loading-wrapper.fade-out {
+  opacity: 0; /* フェードアウト時に透明にする */
+}
+
+.spinner-border {
+  width: 2rem; /* スピナーのサイズ調整 */
+  height: 2rem;
+}
+
+.loading-text {
+  color: white;
+  font-size: 1.0rem; /* テキストのサイズ */
+  margin-top: 20px;
+}
+
 
 
 /* Breakpoints
