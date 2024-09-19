@@ -55,9 +55,11 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.isMounted = true;
-    }, 100); // 100msの遅延を追加
+    // 初回のみリロードさせる
+    if (!this.$ssrContext && window.performance && performance.navigation.type === performance.navigation.TYPE_NAVIGATE) {
+      // クライアントサイドの最初のナビゲーション時のみリロード
+      location.reload();
+    }
   },
   methods: {
       getCategoryClass(categoryName) {
