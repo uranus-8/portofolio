@@ -37,20 +37,16 @@ export default {
       work: {}
     };
   },
-  async asyncData({ params, $microcms }) {
-    console.log("MICROCMS_API_KEY:", process.env.MICROCMS_API_KEY);
-    console.log("MICROCMS_SERVICE_DOMAIN:", process.env.MICROCMS_SERVICE_DOMAIN);
-
-    // microCMSが初期化されているかチェック
-    if (!$microcms) {
-      throw new Error('microCMS client is not initialized');
-    }
-
-    console.log("$microcms:", $microcms);  // 追加
+  async asyncData({ params, $microcms, $config }) {
+    console.log("MICROCMS_API_KEY:", $config.microcmsApiKey);
+    console.log("MICROCMS_SERVICE_DOMAIN:", $config.microcmsServiceDomain);
     try {
       const response = await $microcms.get({
         endpoint: 'works',
-        contentId: params.id
+        contentId: params.id,
+        headers: {
+          'X-API-KEY': $config.microcmsApiKey // 必要に応じてヘッダーでAPIキーを送信
+        }
       });
       return { work: response };
     } catch (error) {
