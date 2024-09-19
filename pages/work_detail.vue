@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="container-fluid ibm-plex-sans-jp-regular works-page" v-if="work && work.title && work.category && work.eyecatch">
+    <div class="container-fluid ibm-plex-sans-jp-regular works-page">
       <div>
           <!--Header-->
           <Header />
@@ -55,7 +55,9 @@ export default {
     }
   },
   mounted() {
-    this.isMounted = true;
+    setTimeout(() => {
+      this.isMounted = true;
+    }, 100); // 100msの遅延を追加
   },
   methods: {
       getCategoryClass(categoryName) {
