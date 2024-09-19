@@ -1,7 +1,10 @@
 <template>
   <div class="container-fluid ibm-plex-sans-jp-regular">
 
-    <div :class="{'loading-wrapper': true, 'fade-out': !loading}">
+    <div
+      ref="loadingWrapper"
+      :class="{'loading-wrapper': true, 'fade-out': !loading}"
+    >
       <div class="loader">
         <div class="spinner-border text-center" role="status">
           <span class="sr-only">Loading...</span>
@@ -140,6 +143,16 @@ export default {
         { id: 'contact', title: 'Contact' }
       ],
       encodedEmail: [102, 116, 109, 105, 104, 45, 106, 104, 114, 96, 113, 96, 102, 104, 63, 102, 108, 96, 104, 107, 45, 98, 110, 108]
+    }
+  },
+  watch: {
+    loading(newVal) {
+      if (!newVal) {
+        const loadingWrapper = this.$refs.loadingWrapper;
+        loadingWrapper.addEventListener('transitionend', () => {
+          loadingWrapper.style.display = 'none';
+        }, { once: true }); // 一度だけ実行されるように
+      }
     }
   },
   computed: {
