@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="container-fluid ibm-plex-sans-jp-regular works-page">
+    <div class="container-fluid ibm-plex-sans-jp-regular works-page" v-if="work && work.title && work.category && work.eyecatch">
       <div>
           <!--Header-->
           <Header />
@@ -38,6 +38,12 @@ export default {
     };
   },
   async asyncData({ params, $microcms }) {
+    // microCMSが初期化されているかチェック
+    if (!$microcms) {
+      throw new Error('microCMS client is not initialized');
+    }
+
+    console.log("$microcms:", $microcms);  // 追加
     try {
       const response = await $microcms.get({
         endpoint: 'works',
