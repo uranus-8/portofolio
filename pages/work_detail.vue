@@ -38,6 +38,9 @@ export default {
     };
   },
   async asyncData({ params, $microcms }) {
+    console.log("MICROCMS_API_KEY:", process.env.MICROCMS_API_KEY);
+    console.log("MICROCMS_SERVICE_DOMAIN:", process.env.MICROCMS_SERVICE_DOMAIN);
+
     // microCMSが初期化されているかチェック
     if (!$microcms) {
       throw new Error('microCMS client is not initialized');
