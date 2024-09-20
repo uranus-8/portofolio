@@ -122,7 +122,6 @@
 import Form from '~/components/Form.vue'
 import Header from '~/components/Header.vue';
 import * as THREE from 'three';
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 export default {
   components: {
@@ -286,7 +285,6 @@ export default {
       scene.add(ambientLight);
 
       try{
-        console.log("Loading model...");
         const gltf = await this.loadModel(); // glTFモデルを先にロード
         const model = gltf.scene;
 
@@ -295,17 +293,12 @@ export default {
         model.rotation.y = Math.PI/-3.8; // Y軸周りに90度回転
 
         scene.add(model);
-        // this.loading = false; // モデルの読み込みが完了したらローディングを非表示にする
-        console.log('Model added to scene:', model);
-
         this.loading = false; // モデルの読み込みが完了したらローディングを非表示にする
-        console.log('this.loading:', this.loading);
 
         let clock = new THREE.Clock();
 
         const animate = () => {
           requestAnimationFrame(animate);
-          // controls.update(); // カメラコントロールを更新
           if (model) {
             const time = clock.getElapsedTime();
             model.position.y = Math.sin(time) * 1.2 - 8;;
@@ -331,8 +324,6 @@ export default {
       controls.screenSpacePanning = false; // パン操作を無効にする
       controls.maxPolarAngle = Math.PI / 2; // 垂直方向の回転を制限
       controls.update(); // カメラコントロールの更新
-
-      console.log('OrbitControls initialized:', controls);
     }
   }
 }

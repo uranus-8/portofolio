@@ -38,8 +38,7 @@ export default {
     };
   },
   async asyncData({ params, $microcms, $config }) {
-    console.log("MICROCMS_API_KEY:", $config.microcmsApiKey);
-    console.log("MICROCMS_SERVICE_DOMAIN:", $config.microcmsServiceDomain);
+
     try {
       const response = await $microcms.get({
         endpoint: 'works',
