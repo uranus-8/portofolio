@@ -3,6 +3,8 @@
 .btn-primary{
   background: linear-gradient(135deg, #77818e, #84969a);
   border: none;
+  transition: all 1s ease;
+  opacity: 1;
 }
 
 .btn-lg, .btn-group-lg > .btn {
@@ -11,6 +13,20 @@
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 1);
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  color: #fff;
+  background-color: none;
+  border-color: none;
+  box-shadow: none;
+  border: none;
+}
+
+.btn-primary:hover{
+  border: none;
+  transition: all 1s ease;
+  opacity: 0.8;
 }
 
 /* Font lato
