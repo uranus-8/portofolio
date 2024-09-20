@@ -16,9 +16,9 @@
 
                 <div class="rower" v-for="work in works" :key="work.id">
                   <div class="coller eyecatch">
-                    <nuxt-link :to="{ name: 'work-detail', params: { id: work.id } }">
+                    <a :href="`/works/${work.id}`">
                       <img :src="work.eyecatch.url" alt="" class="eyecatch-img">
-                    </nuxt-link>
+                    </a>
                   </div>
                   <div class="coller title">{{ work.title }}</div>
                   <div :class="['coller', 'badge', 'badge-pill', getCategoryClass(work.category.name)]">{{ work.category.name }}</div>

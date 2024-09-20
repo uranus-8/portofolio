@@ -55,11 +55,9 @@ export default {
     }
   },
   mounted() {
-    // 初回のみリロードさせる
-    if (!this.$ssrContext && window.performance && performance.navigation.type === performance.navigation.TYPE_NAVIGATE) {
-      // クライアントサイドの最初のナビゲーション時のみリロード
-      location.reload();
-    }
+    setTimeout(() => {
+      this.isMounted = true;
+    }, 100); // 100msの遅延を追加
   },
   methods: {
       getCategoryClass(categoryName) {
