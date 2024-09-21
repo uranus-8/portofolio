@@ -91,7 +91,7 @@
             </div>
             <div class="mt-3">
               <p>
-                <a class="btn btn-primary btn-lg mb-4" target="_blank" href="https://play.unity.com/mg/other/webgl-builds-405853">Demo</a>
+                <a class="btn btn-primary btn-lg mb-4" target="_blank" href="https://play.unity.com/en/games/267bffe6-b93b-496b-8d83-b642f3289858/wiiloffroaderver02">β-version Play</a>
               </p>
             </div>
           </div>
